@@ -69,6 +69,7 @@ extension ProfileSetupViewController: UIPickerViewDelegate, UIPickerViewDataSour
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         print(String(years[row]))
+        ageTextFIeld.text = String(years[row])
     }
 
     func textFieldDidBeginEditing(_ textField: UITextField) {
@@ -83,7 +84,7 @@ extension ProfileSetupViewController: UIPickerViewDelegate, UIPickerViewDataSour
         let defaultFormStackViewHeight = formStackView.layer.bounds.height
         let keyboardHeight = info.endFrame.height
         let x = self.view.bounds.height - defaultFormStackViewHeight // 228
-        let final = -((x - keyboardHeight) + 16)
+        let final = -((x - keyboardHeight) + 24 + 64)
         print(self.view.bounds.height)
         formStackView.transform = CGAffineTransform(translationX: 0.0, y: final)
     }
