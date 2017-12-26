@@ -10,6 +10,13 @@ target 'Lez' do
   pod 'Firebase/Firestore'
   pod 'FirebaseUI/Auth'
   pod 'FirebaseUI/Facebook'
+  
+  pod 'GooglePlaces'
+  pod 'GooglePlacePicker'
+  pod 'GoogleMaps'
+  
+  pod 'SnapKit', '~> 4.0.0'
+  pod 'KeyboardHelper', '~> 1.0'
 
   target 'LezTests' do
     inherit! :search_paths

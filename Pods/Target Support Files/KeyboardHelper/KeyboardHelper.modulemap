@@ -1,0 +1,6 @@
+framework module KeyboardHelper {
+  umbrella header "KeyboardHelper-umbrella.h"
+
+  export *
+  module * { export * }
+}
