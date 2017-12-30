@@ -18,9 +18,10 @@ target 'Lez' do
   
   pod 'SnapKit', '~> 4.0.0'
   pod 'KeyboardHelper', '~> 1.0'
-  
   pod 'PromiseKit', '~> 4.4'
-
+  pod 'CodableFirebase'
+  pod 'Koloda', '~> 4.3.1'
+  
   target 'LezTests' do
     inherit! :search_paths
     # Pods for testing

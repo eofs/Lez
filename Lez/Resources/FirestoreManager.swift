@@ -9,6 +9,7 @@
 import Foundation
 import Firebase
 import PromiseKit
+import CodableFirebase
 
 class FirestoreManager {
     
@@ -24,9 +25,11 @@ class FirestoreManager {
         return Promise { fulfill, reject in
             let query = db.collection("users").whereField(property, isEqualTo: isEqualTo)
             query.getDocuments { (snapshot, error) in
-                guard let snapshot = snapshot?.documents else { print(error!); return }
-                print("There is \(snapshot.count) items.")
-                if snapshot.count == 1 {
+                guard let snapshot = snapshot?.documents else {
+                    reject(error!)
+                    return
+                }
+                if snapshot.count > 0 {
                     fulfill(true)
                 } else {
                     fulfill(false)
@@ -40,6 +43,7 @@ class FirestoreManager {
             if userExists {
                 print("User exists, going to MatchViewController.")
             } else {
+                Defaults.sharedInstance.saveLocation(location: user.location)
                 self.db.collection("users").document(user.email).setData([
                     "name": user.name,
                     "email": user.email,
@@ -72,19 +76,60 @@ class FirestoreManager {
             profileImage.putData(data, metadata: nil) { (metadata, error) in
                 guard let metadata = metadata else {
                     // Uh-oh, an error occurred!
+                    reject(error!)
                     return
                 }
                 // Metadata contains file metadata such as size, content-type, and download URL.
-                guard let downloadURL = metadata.path else { return }
-                
+                guard let downloadURL = metadata.path else { return }   
                 self.db.collection("users").document(currentUser).setData([ "profileImageURL": downloadURL ], options: SetOptions.merge())
+                fulfull(true)
             }
             
         }
     }
     
+    func fetchPotentialMatches(location: String) -> Promise<[Lesbian]> {
+        return Promise { fulfill, reject in
+            let query = db.collection("users").whereField("location", isEqualTo: location)
+            var lesbians = [Lesbian]()
+            
+            query.getDocuments { (snapshot, error) in
+                guard let snapshot = snapshot?.documents else {
+                    reject(error!)
+                    return
+                }
+                
+                for lesbian in snapshot {
+                    let newLesbian = try! FirestoreDecoder().decode(Lesbian.self, from: lesbian.data())
+                    lesbians.append(newLesbian)
+                }
+                
+                fulfill(lesbians)
+            }
+        }
+    }
+    
+//    func fetchPotentialMatchesWithAgeRange(location: String, ageStart: Int, ageEnd: Int) {
+//        let query = db.collection("users").whereField("location", isEqualTo: location).whereField("age", isGreaterThanOrEqualTo: ageStart).whereField("age", isLessThanOrEqualTo: ageEnd)
+//
+//        query.getDocuments { (snapshot, error) in
+//            if let err = error {
+//                print("Error getting documents: \(err)")
+//            } else {
+//                for document in snapshot!.documents {
+//                    print("\(document.documentID) => \(document.data())")
+//                }
+//            }
+//        }
+//    }
+    
     func signOut() {
-        try! Auth.auth().signOut()
+        let firebaseAuth = Auth.auth()
+        do {
+            try firebaseAuth.signOut()
+        } catch let signOutError as NSError {
+            print ("Error signing out: %@", signOutError)
+        }
     }
     
 }

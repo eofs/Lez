@@ -27,6 +27,7 @@ class ProfileImageViewController: UIViewController {
         present(imagePicker, animated: true, completion: nil)
     }
     
+    // TODO: Put spinner, disable UI
     @IBAction func finishButtonTapped(_ sender: Any) {
         if profileImage.image == nil {
             print("No image")
@@ -34,9 +35,30 @@ class ProfileImageViewController: UIViewController {
             // Start app
             guard let image = profileImage.image else { return }
             FirestoreManager.sharedInstance.uploadImage(image: image).then { isUploaded -> Void in
-                // Segue to MatchViewController
+                print(isUploaded)
+                if isUploaded {
+                    self.performSegue(withIdentifier: matchSegue, sender: nil)
+                } else {
+                     let dialogMessage = UIAlertController(title: "Oh-uh", message: "Image couldn't be uploaded, please try again.", preferredStyle: .alert)
+                    
+                    // Create OK button with action handler
+                    let ok = UIAlertAction(title: "OK", style: .default, handler: { (action) -> Void in
+                        print("Ok button tapped")
+                    })
+                    
+                    // Create Cancel button with action handlder
+                    let cancel = UIAlertAction(title: "Cancel", style: .cancel) { (action) -> Void in
+                        print("Cancel button tapped")
+                    }
+                    
+                    //Add OK and Cancel button to dialog message
+                    dialogMessage.addAction(ok)
+                    dialogMessage.addAction(cancel)
+                    
+                    // Present dialog message to user
+                    self.present(dialogMessage, animated: true, completion: nil)
+                }
             }
-            print("Shit is on!!!")
         }
     }
 }
@@ -48,7 +70,7 @@ extension ProfileImageViewController: UIImagePickerControllerDelegate, UINavigat
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         if let pickedImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
-            profileImage.contentMode = .scaleToFill
+            profileImage.contentMode = .scaleAspectFill
             profileImage.image = pickedImage
         }
         

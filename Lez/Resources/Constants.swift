@@ -11,3 +11,4 @@ import Foundation
 let loggedIn = "loggedin"
 let profileImageSegue = "goToProfileImage"
 let profileSetupSegue = "goToProfileSetup"
+let matchSegue = "goToMatch"

@@ -14,6 +14,7 @@
 		CF0D0C261FF68D8800DF8488 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF0D0C251FF68D8800DF8488 /* ProfileViewController.swift */; };
 		CF0D0C281FF6B5F600DF8488 /* FirestoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF0D0C271FF6B5F600DF8488 /* FirestoreManager.swift */; };
 		CF10C3DA1FF4E07600C530DB /* PrimaryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF10C3D91FF4E07600C530DB /* PrimaryButton.swift */; };
+		CF1110311FF802D10035CB33 /* Defaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF1110301FF802D10035CB33 /* Defaults.swift */; };
 		CF2967141FDC6777002A2928 /* Lesbian.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF2967131FDC6777002A2928 /* Lesbian.swift */; };
 		CF50783A1FEEA8E100C218B9 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF5078391FEEA8E100C218B9 /* Constants.swift */; };
 		CF8EAA121FF798F00006D65A /* CardBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF8EAA111FF798F00006D65A /* CardBackground.swift */; };
@@ -57,6 +58,7 @@
 		CF0D0C251FF68D8800DF8488 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		CF0D0C271FF6B5F600DF8488 /* FirestoreManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreManager.swift; sourceTree = "<group>"; };
 		CF10C3D91FF4E07600C530DB /* PrimaryButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrimaryButton.swift; sourceTree = "<group>"; };
+		CF1110301FF802D10035CB33 /* Defaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Defaults.swift; sourceTree = "<group>"; };
 		CF2967131FDC6777002A2928 /* Lesbian.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lesbian.swift; sourceTree = "<group>"; };
 		CF5078391FEEA8E100C218B9 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		CF8EAA111FF798F00006D65A /* CardBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardBackground.swift; sourceTree = "<group>"; };
@@ -223,6 +225,7 @@
 				CF5078391FEEA8E100C218B9 /* Constants.swift */,
 				CF0D0C271FF6B5F600DF8488 /* FirestoreManager.swift */,
 				CF8EAA131FF7AA030006D65A /* Extensions.swift */,
+				CF1110301FF802D10035CB33 /* Defaults.swift */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -455,8 +458,8 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-Lez/Pods-Lez-resources.sh",
-				$PODS_CONFIGURATION_BUILD_DIR/FirebaseUI/FirebaseAuthUI.bundle,
-				$PODS_CONFIGURATION_BUILD_DIR/FirebaseUI/FirebaseFacebookAuthUI.bundle,
+				"$PODS_CONFIGURATION_BUILD_DIR/FirebaseUI/FirebaseAuthUI.bundle",
+				"$PODS_CONFIGURATION_BUILD_DIR/FirebaseUI/FirebaseFacebookAuthUI.bundle",
 				"${PODS_ROOT}/GoogleMaps/Maps/Frameworks/GoogleMaps.framework/Resources/GoogleMaps.bundle",
 				"${PODS_ROOT}/GooglePlacePicker/Frameworks/GooglePlacePicker.framework/Resources/GooglePlacePicker.bundle",
 				"${PODS_ROOT}/GooglePlaces/Frameworks/GooglePlaces.framework/Resources/GooglePlaces.bundle",
@@ -512,11 +515,13 @@
 				"${SRCROOT}/Pods/Target Support Files/Pods-Lez/Pods-Lez-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Bolts/Bolts.framework",
 				"${BUILT_PRODUCTS_DIR}/BoringSSL/openssl.framework",
+				"${BUILT_PRODUCTS_DIR}/CodableFirebase/CodableFirebase.framework",
 				"${BUILT_PRODUCTS_DIR}/FBSDKCoreKit/FBSDKCoreKit.framework",
 				"${BUILT_PRODUCTS_DIR}/FBSDKLoginKit/FBSDKLoginKit.framework",
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
 				"${BUILT_PRODUCTS_DIR}/KeyboardHelper/KeyboardHelper.framework",
+				"${BUILT_PRODUCTS_DIR}/Koloda/Koloda.framework",
 				"${BUILT_PRODUCTS_DIR}/PromiseKit/PromiseKit.framework",
 				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
 				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
@@ -526,16 +531,19 @@
 				"${BUILT_PRODUCTS_DIR}/gRPC-RxLibrary/RxLibrary.framework",
 				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
+				"${BUILT_PRODUCTS_DIR}/pop/pop.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Bolts.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/openssl.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CodableFirebase.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKCoreKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKLoginKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/KeyboardHelper.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Koloda.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PromiseKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
@@ -545,6 +553,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxLibrary.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/pop.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -567,6 +576,7 @@
 				CF50783A1FEEA8E100C218B9 /* Constants.swift in Sources */,
 				CF0D0C261FF68D8800DF8488 /* ProfileViewController.swift in Sources */,
 				CF0D0C281FF6B5F600DF8488 /* FirestoreManager.swift in Sources */,
+				CF1110311FF802D10035CB33 /* Defaults.swift in Sources */,
 				CF8EAA141FF7AA030006D65A /* Extensions.swift in Sources */,
 				CF0D0C241FF6844D00DF8488 /* ProfileImageViewController.swift in Sources */,
 			);
