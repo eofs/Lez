@@ -10,8 +10,14 @@
 		17CB162E220F400E7725C858 /* Pods_LezTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 208A79623584C5404FE914F7 /* Pods_LezTests.framework */; };
 		7EF92F1E3F622038DE771393 /* Pods_LezUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4A69489AEEE094BC40F60FD /* Pods_LezUITests.framework */; };
 		C3EFE12ADECE0A8FE5B70598 /* Pods_Lez.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C3C4F2EE7AB9BAC30506FA2A /* Pods_Lez.framework */; };
+		CF0D0C241FF6844D00DF8488 /* ProfileImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF0D0C231FF6844D00DF8488 /* ProfileImageViewController.swift */; };
+		CF0D0C261FF68D8800DF8488 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF0D0C251FF68D8800DF8488 /* ProfileViewController.swift */; };
+		CF0D0C281FF6B5F600DF8488 /* FirestoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF0D0C271FF6B5F600DF8488 /* FirestoreManager.swift */; };
+		CF10C3DA1FF4E07600C530DB /* PrimaryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF10C3D91FF4E07600C530DB /* PrimaryButton.swift */; };
 		CF2967141FDC6777002A2928 /* Lesbian.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF2967131FDC6777002A2928 /* Lesbian.swift */; };
 		CF50783A1FEEA8E100C218B9 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF5078391FEEA8E100C218B9 /* Constants.swift */; };
+		CF8EAA121FF798F00006D65A /* CardBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF8EAA111FF798F00006D65A /* CardBackground.swift */; };
+		CF8EAA141FF7AA030006D65A /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF8EAA131FF7AA030006D65A /* Extensions.swift */; };
 		CFAA5C791FEECAF900E47927 /* ProfileSetupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFAA5C781FEECAF900E47927 /* ProfileSetupViewController.swift */; };
 		CFB7E95C1FDBEBC000D35893 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFB7E95B1FDBEBC000D35893 /* AppDelegate.swift */; };
 		CFB7E95E1FDBEBC000D35893 /* MatchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFB7E95D1FDBEBC000D35893 /* MatchViewController.swift */; };
@@ -47,8 +53,14 @@
 		5A3FB2D7CD202ED6664A1455 /* Pods-LezTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LezTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-LezTests/Pods-LezTests.release.xcconfig"; sourceTree = "<group>"; };
 		A3B8C5BE5C678AAEDA4CEF02 /* Pods-Lez.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Lez.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Lez/Pods-Lez.debug.xcconfig"; sourceTree = "<group>"; };
 		C3C4F2EE7AB9BAC30506FA2A /* Pods_Lez.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Lez.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		CF0D0C231FF6844D00DF8488 /* ProfileImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImageViewController.swift; sourceTree = "<group>"; };
+		CF0D0C251FF68D8800DF8488 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		CF0D0C271FF6B5F600DF8488 /* FirestoreManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreManager.swift; sourceTree = "<group>"; };
+		CF10C3D91FF4E07600C530DB /* PrimaryButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrimaryButton.swift; sourceTree = "<group>"; };
 		CF2967131FDC6777002A2928 /* Lesbian.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lesbian.swift; sourceTree = "<group>"; };
 		CF5078391FEEA8E100C218B9 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		CF8EAA111FF798F00006D65A /* CardBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardBackground.swift; sourceTree = "<group>"; };
+		CF8EAA131FF7AA030006D65A /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		CFAA5C781FEECAF900E47927 /* ProfileSetupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSetupViewController.swift; sourceTree = "<group>"; };
 		CFB7E9581FDBEBC000D35893 /* Lez.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Lez.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CFB7E95B1FDBEBC000D35893 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -120,6 +132,15 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		CF8EAA101FF798BF0006D65A /* Custom Design */ = {
+			isa = PBXGroup;
+			children = (
+				CF10C3D91FF4E07600C530DB /* PrimaryButton.swift */,
+				CF8EAA111FF798F00006D65A /* CardBackground.swift */,
+			);
+			path = "Custom Design";
+			sourceTree = "<group>";
+		};
 		CFB7E94F1FDBEBC000D35893 = {
 			isa = PBXGroup;
 			children = (
@@ -148,6 +169,7 @@
 				CFF7D0741FEFABAD00B42D6B /* Controllers */,
 				CFF7D0751FEFABB600B42D6B /* Models */,
 				CFF7D0761FEFABCF00B42D6B /* Resources */,
+				CF8EAA101FF798BF0006D65A /* Custom Design */,
 				CFECC6DA1FDC059500A927FE /* GoogleService-Info.plist */,
 				CFB7E95B1FDBEBC000D35893 /* AppDelegate.swift */,
 				CFB7E95F1FDBEBC000D35893 /* Main.storyboard */,
@@ -181,6 +203,8 @@
 			children = (
 				CFB7E95D1FDBEBC000D35893 /* MatchViewController.swift */,
 				CFAA5C781FEECAF900E47927 /* ProfileSetupViewController.swift */,
+				CF0D0C231FF6844D00DF8488 /* ProfileImageViewController.swift */,
+				CF0D0C251FF68D8800DF8488 /* ProfileViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -197,6 +221,8 @@
 			isa = PBXGroup;
 			children = (
 				CF5078391FEEA8E100C218B9 /* Constants.swift */,
+				CF0D0C271FF6B5F600DF8488 /* FirestoreManager.swift */,
+				CF8EAA131FF7AA030006D65A /* Extensions.swift */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -429,8 +455,8 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-Lez/Pods-Lez-resources.sh",
-				"$PODS_CONFIGURATION_BUILD_DIR/FirebaseUI/FirebaseAuthUI.bundle",
-				"$PODS_CONFIGURATION_BUILD_DIR/FirebaseUI/FirebaseFacebookAuthUI.bundle",
+				$PODS_CONFIGURATION_BUILD_DIR/FirebaseUI/FirebaseAuthUI.bundle,
+				$PODS_CONFIGURATION_BUILD_DIR/FirebaseUI/FirebaseFacebookAuthUI.bundle,
 				"${PODS_ROOT}/GoogleMaps/Maps/Frameworks/GoogleMaps.framework/Resources/GoogleMaps.bundle",
 				"${PODS_ROOT}/GooglePlacePicker/Frameworks/GooglePlacePicker.framework/Resources/GooglePlacePicker.bundle",
 				"${PODS_ROOT}/GooglePlaces/Frameworks/GooglePlaces.framework/Resources/GooglePlaces.bundle",
@@ -491,6 +517,7 @@
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
 				"${BUILT_PRODUCTS_DIR}/KeyboardHelper/KeyboardHelper.framework",
+				"${BUILT_PRODUCTS_DIR}/PromiseKit/PromiseKit.framework",
 				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
 				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
 				"${BUILT_PRODUCTS_DIR}/gRPC/GRPCClient.framework",
@@ -509,6 +536,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/KeyboardHelper.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PromiseKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GRPCClient.framework",
@@ -530,11 +558,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CF10C3DA1FF4E07600C530DB /* PrimaryButton.swift in Sources */,
+				CF8EAA121FF798F00006D65A /* CardBackground.swift in Sources */,
 				CFB7E95E1FDBEBC000D35893 /* MatchViewController.swift in Sources */,
 				CFB7E95C1FDBEBC000D35893 /* AppDelegate.swift in Sources */,
 				CF2967141FDC6777002A2928 /* Lesbian.swift in Sources */,
 				CFAA5C791FEECAF900E47927 /* ProfileSetupViewController.swift in Sources */,
 				CF50783A1FEEA8E100C218B9 /* Constants.swift in Sources */,
+				CF0D0C261FF68D8800DF8488 /* ProfileViewController.swift in Sources */,
+				CF0D0C281FF6B5F600DF8488 /* FirestoreManager.swift in Sources */,
+				CF8EAA141FF7AA030006D65A /* Extensions.swift in Sources */,
+				CF0D0C241FF6844D00DF8488 /* ProfileImageViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

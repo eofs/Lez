@@ -9,25 +9,37 @@
 import UIKit
 import KeyboardHelper
 import SnapKit
+import GooglePlaces
+import GooglePlacePicker
+import GoogleMaps
+import Firebase
 
 class ProfileSetupViewController: UIViewController {
     
     // MARK: - Properties
     var years = Array(18...100).map { String($0) }
     private var keyboardHelper : KeyboardHelper?
+    var keyboardHeight = CGFloat()
+    var location = String()
+    var name = String()
+    var email = String()
     
     // MARK: - Outlets
     @IBOutlet weak var agePickerView: UIPickerView!
-    @IBOutlet weak var ageTextFIeld: UITextField!
+    @IBOutlet weak var ageTextField: UITextField!
     @IBOutlet weak var formStackView: UIStackView!
+    @IBOutlet weak var locationButton: UIButton!
+    @IBOutlet weak var nextButton: PrimaryButton!
+    @IBOutlet weak var nameTextField: UITextField!
     
     // MARK: - App Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         agePickerView.delegate = self
         agePickerView.dataSource = self
-        ageTextFIeld.delegate = self
+        ageTextField.delegate = self 
         keyboardHelper = KeyboardHelper(delegate: self)
+        nameTextField.text = name
     }
 
     
@@ -43,18 +55,57 @@ class ProfileSetupViewController: UIViewController {
             layer.alpha = 1
         }
     }
-
     
-    // MARK: - Navigation
+    func showPicker() {
+        if ageTextField.isEditing {
+            let defaultFormStackViewHeight = formStackView.layer.bounds.height
+            let x = self.view.bounds.height - defaultFormStackViewHeight
+            let final = -((x - keyboardHeight) + 24 + 64)
+            formStackView.transform = CGAffineTransform(translationX: 0.0, y: final)
+        }
+    }
+    
+    @IBAction func locationTapped(_ sender: UIButton) {
+        let autocompleteController = GMSAutocompleteViewController()
+        let filter = GMSAutocompleteFilter()
+        filter.type = GMSPlacesAutocompleteTypeFilter.city
+        autocompleteController.delegate = self
+        present(autocompleteController, animated: true, completion: nil)
+    }
+    
+    @IBAction func nextButton(_ sender: Any) {
+        guard let name = nameTextField.text, let age = ageTextField.text else {
+            return
+        }
+        
+        if name.isEmpty || location.isEmpty || age.isEmpty {
+            // Display error
+            print("Error")
+        } else {
+            // Go to ProfileImageController
+            print("Will go to ProfileImageController")
+            guard let ageAsInt = Int(age) else {
+                return
+            }
+            
+            // Create user
+            let lesbian = Lesbian(name: name, email: email, age: ageAsInt, location: location)
+            print(lesbian)
+            FirestoreManager.sharedInstance.createUser(email: email, user: lesbian)
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
+            // Go to profile image setup
+            performSegue(withIdentifier: profileImageSegue, sender: nil)
+        }
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        let backItem = UIBarButtonItem()
+        backItem.title = ""
+        navigationItem.backBarButtonItem = backItem // This will show in the next view controller being pushed
     }
 }
 
-extension ProfileSetupViewController: UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate, KeyboardNotificationDelegate {
+extension ProfileSetupViewController: UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate, KeyboardNotificationDelegate, GMSAutocompleteViewControllerDelegate {
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
     }
@@ -69,11 +120,13 @@ extension ProfileSetupViewController: UIPickerViewDelegate, UIPickerViewDataSour
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         print(String(years[row]))
-        ageTextFIeld.text = String(years[row])
+        ageTextField.text = String(years[row])
+        ageTextField.resignFirstResponder()
     }
 
     func textFieldDidBeginEditing(_ textField: UITextField) {
         fadeIn(layer: agePickerView, duration: 1.0)
+        showPicker()
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
@@ -81,12 +134,7 @@ extension ProfileSetupViewController: UIPickerViewDelegate, UIPickerViewDataSour
     }
     
     func keyboardWillAppear(_ info: KeyboardAppearanceInfo) {
-        let defaultFormStackViewHeight = formStackView.layer.bounds.height
-        let keyboardHeight = info.endFrame.height
-        let x = self.view.bounds.height - defaultFormStackViewHeight // 228
-        let final = -((x - keyboardHeight) + 24 + 64)
-        print(self.view.bounds.height)
-        formStackView.transform = CGAffineTransform(translationX: 0.0, y: final)
+        keyboardHeight = info.endFrame.height
     }
     
     func keyboardWillDisappear(_ info: KeyboardAppearanceInfo) {
@@ -95,5 +143,20 @@ extension ProfileSetupViewController: UIPickerViewDelegate, UIPickerViewDataSour
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
+    }
+    
+    func viewController(_ viewController: GMSAutocompleteViewController, didAutocompleteWith place: GMSPlace) {
+        print(place)
+        locationButton.setTitle("\(place.name)", for: .normal)
+        locationButton.setTitleColor(UIColor.black, for: .normal)
+        location = place.name
+        dismiss(animated: true, completion: nil)
+    }
+    
+    func viewController(_ viewController: GMSAutocompleteViewController, didFailAutocompleteWithError error: Error) {
+    }
+    
+    func wasCancelled(_ viewController: GMSAutocompleteViewController) {
+        dismiss(animated: true, completion: nil)
     }
 }

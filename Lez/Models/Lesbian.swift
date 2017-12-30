@@ -12,8 +12,8 @@ import GooglePlacePicker
 import GoogleMaps
 
 struct Lesbian {
-    let name: String?
-    let email: String?
-    let age: Int?
-    let location: GMSPlace?
+    let name: String!
+    let email: String!
+    let age: Int!
+    let location: String!
 }

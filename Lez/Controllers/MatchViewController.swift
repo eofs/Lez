@@ -10,11 +10,12 @@ import UIKit
 import Firebase
 import FirebaseAuthUI
 import FirebaseFacebookAuthUI
-import GooglePlaces
-import GooglePlacePicker
-import GoogleMaps
+import PromiseKit
 
 class MatchViewController: UIViewController, FUIAuthDelegate {
+    
+    var name = String()
+    var email = String()
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -50,32 +51,29 @@ class MatchViewController: UIViewController, FUIAuthDelegate {
             return
         }
         
-        print("Logged in as \(String(describing: user.email)), \(String(describing: user.displayName))")
+        guard let unwrappedName = user.displayName else { return }
+        guard let unwrappedEmail = user.email else { return }
+        name = unwrappedName
+        email = unwrappedEmail
+        print("Before checkIdExist")
+        FirestoreManager.sharedInstance.checkIfExist(property: "email", isEqualTo: email).then { userExists -> Void in
+            if userExists {
+                print("User exists, going to MatchViewController.")
+                self.dismiss(animated: true, completion: nil)
+            } else {
+                print("No user, going to ProfileSetupViewController.")
+                self.performSegue(withIdentifier: profileSetupSegue, sender: nil)
+            }
+        }
     }
     
-    
-    
-    // Present the Autocomplete view controller when the button is pressed.
-    @IBAction func autocompleteClicked(_ sender: UIButton) {
-        let autocompleteController = GMSAutocompleteViewController()
-        autocompleteController.delegate = self
-        present(autocompleteController, animated: true, completion: nil)
-    }
-
-
-}
-
-extension MatchViewController: GMSAutocompleteViewControllerDelegate {
-    func viewController(_ viewController: GMSAutocompleteViewController, didAutocompleteWith place: GMSPlace) {
-        print(place)
-        dismiss(animated: true, completion: nil)
-    }
-    
-    func viewController(_ viewController: GMSAutocompleteViewController, didFailAutocompleteWithError error: Error) {
-    }
-    
-    func wasCancelled(_ viewController: GMSAutocompleteViewController) {
-        dismiss(animated: true, completion: nil)
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == profileSetupSegue {
+            let destinationNavigationController = segue.destination as! UINavigationController
+            let targetController = destinationNavigationController.topViewController as! ProfileSetupViewController
+            targetController.email = email
+            targetController.name = name
+        }
     }
 }
 
