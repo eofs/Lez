@@ -91,10 +91,17 @@ class ProfileSetupViewController: UIViewController {
             // Create user
             let lesbian = Lesbian(name: name, email: email, age: ageAsInt, location: location)
             print(lesbian)
+            
             FirestoreManager.sharedInstance.createUser(email: email, user: lesbian)
-
-            // Go to profile image setup
-            performSegue(withIdentifier: profileImageSegue, sender: nil)
+                .catch { err in
+                    // TODO: Display proper error message
+                    print("Could not store user data", err)
+                }
+                .then(on: DispatchQueue.main) { created -> Void in
+                    print("New user profile created:", created)
+                    // Go to profile image setup
+                    self.performSegue(withIdentifier: profileImageSegue, sender: nil)
+            }
         }
     }
     

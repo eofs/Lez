@@ -38,22 +38,33 @@ class FirestoreManager {
         }
     }
     
-    func createUser(email: String, user: Lesbian) {
-        FirestoreManager.sharedInstance.checkIfExist(property: email, isEqualTo: user.email).then { userExists -> Void in
-            if userExists {
-                print("User exists, going to MatchViewController.")
-            } else {
-                Defaults.sharedInstance.saveLocation(location: user.location)
-                self.db.collection("users").document(user.email).setData([
-                    "name": user.name,
-                    "email": user.email,
-                    "age": user.age,
-                    "location": user.location
-                ]) { err in
-                    if let err = err {
-                        print("Error writing document: \(err)")
-                    } else {
+    /// Create new user or update existing
+    ///
+    /// - Parameters:
+    ///   - email: User's email address
+    ///   - user: The user object
+    /// - Returns: A promise that resolves a boolean indicating if new user profile was created.
+    func createUser(email: String, user: Lesbian) -> Promise<Bool> {
+        return Promise { fulfill, reject in
+            FirestoreManager.sharedInstance.checkIfExist(property: email, isEqualTo: user.email).then { userExists -> Void in
+                if userExists {
+                    print("User exists, going to MatchViewController.")
+                    fulfill(false)
+                } else {
+                    Defaults.sharedInstance.saveLocation(location: user.location)
+                    self.db.collection("users").document(user.email).setData([
+                        "name": user.name,
+                        "email": user.email,
+                        "age": user.age,
+                        "location": user.location
+                    ]) { err in
+                        guard err == nil else {
+                            print("Error writing document:", err!)
+                            reject(err!)
+                            return
+                        }
                         print("Document successfully written!")
+                        fulfill(true)
                     }
                 }
             }
