@@ -22,6 +22,9 @@ target 'Lez' do
   pod 'CodableFirebase'
   pod 'Koloda', '~> 4.3.1'
   
+  pod 'AlamofireImage', '~> 3.3'
+  pod 'Alamofire', '~> 4.5'
+  
   target 'LezTests' do
     inherit! :search_paths
     # Pods for testing

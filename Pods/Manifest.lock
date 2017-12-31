@@ -1,4 +1,7 @@
 PODS:
+  - Alamofire (4.6.0)
+  - AlamofireImage (3.3.0):
+    - Alamofire (~> 4.5)
   - Bolts (1.8.4):
     - Bolts/AppLinks (= 1.8.4)
     - Bolts/Tasks (= 1.8.4)
@@ -121,6 +124,8 @@ PODS:
   - SnapKit (4.0.0)
 
 DEPENDENCIES:
+  - Alamofire (~> 4.5)
+  - AlamofireImage (~> 3.3)
   - CodableFirebase
   - Firebase/Core
   - Firebase/Firestore
@@ -136,6 +141,8 @@ DEPENDENCIES:
   - SnapKit (~> 4.0.0)
 
 SPEC CHECKSUMS:
+  Alamofire: f41a599bd63041760b26d393ec1069d9d7b917f4
+  AlamofireImage: 2e784dc5d00f04903a52c1d169181469c805c3df
   Bolts: 8a7995239dbe724f9cba2248b766d48b7ebdd322
   BoringSSL: 84318770d120503ab1a6aaf1df777c5ca053697e
   CodableFirebase: 8310f6336b2f6aba70b023389bee2a104b6a9033
@@ -167,6 +174,6 @@ SPEC CHECKSUMS:
   Protobuf: 8a9838fba8dae3389230e1b7f8c104aa32389c03
   SnapKit: a42d492c16e80209130a3379f73596c3454b7694
 
-PODFILE CHECKSUM: 31598156162e782532cfc8881063818140ab9b51
+PODFILE CHECKSUM: 4717c132955835212e18eefa477d426db50555b3
 
 COCOAPODS: 1.3.1

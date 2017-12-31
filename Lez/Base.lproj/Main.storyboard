@@ -18,11 +18,29 @@
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4y2-jg-gzv" customClass="KolodaView" customModule="Koloda">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="530"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <accessibility key="accessibilityConfiguration">
+                                    <accessibilityTraits key="traits" image="YES"/>
+                                </accessibility>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="4y2-jg-gzv" secondAttribute="height" multiplier="75:106" id="WMm-XO-znk"/>
+                                </constraints>
+                            </view>
+                        </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="4y2-jg-gzv" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="84H-hl-ZN2"/>
+                            <constraint firstItem="4y2-jg-gzv" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="SDd-A6-Amb"/>
+                            <constraint firstItem="4y2-jg-gzv" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="am0-a1-05Z"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Match" id="yAI-Cj-OnO"/>
                     <connections>
+                        <outlet property="cardView" destination="4y2-jg-gzv" id="FqD-fk-YSH"/>
                         <segue destination="CVt-tD-OhF" kind="show" identifier="goToProfileSetup" id="VcD-Hn-TXz"/>
                     </connections>
                 </viewController>
@@ -214,7 +232,7 @@
                     </view>
                     <connections>
                         <outlet property="profileImage" destination="gpw-Ss-Rcn" id="FKS-GJ-nHE"/>
-                        <segue destination="BYZ-38-t0r" kind="show" identifier="goToMatch" id="c1t-t3-WS6"/>
+                        <segue destination="WCz-k7-gxe" kind="show" identifier="goToMatch" id="zIp-KU-HNj"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JI9-gr-Kxx" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -305,8 +323,4 @@
     <resources>
         <image name="Arrow" width="24" height="24"/>
     </resources>
-    <inferredMetricsTieBreakers>
-        <segue reference="VcD-Hn-TXz"/>
-        <segue reference="c1t-t3-WS6"/>
-    </inferredMetricsTieBreakers>
 </document>

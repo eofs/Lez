@@ -60,6 +60,23 @@ class FirestoreManager {
         }
     }
     
+    func fetchUsersLocation(email: String) -> Promise<String> {
+        return Promise { fulfill, reject in
+            let docRef = db.collection("users").document(email)
+            docRef.getDocument { (document, error) in
+                guard let document = document else {
+                    reject(error!)
+                    return
+                }
+                print(document.data())
+                let lesbian = try! FirestoreDecoder().decode(Lesbian.self, from: document.data())
+                
+                fulfill(lesbian.location)
+            }
+        }
+    }
+    
+    
     func uploadImage(image: UIImage) -> Promise<Bool> {
         return Promise { fulfull, reject in
             
