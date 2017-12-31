@@ -89,6 +89,7 @@ class ProfileSetupViewController: UIViewController {
             }
             
             // Create user
+            guard let email = Auth.auth().currentUser?.email else { return }
             let lesbian = Lesbian(name: name, email: email, age: ageAsInt, location: location)
             print(lesbian)
             

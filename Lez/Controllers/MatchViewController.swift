@@ -28,6 +28,7 @@ class MatchViewController: UIViewController, FUIAuthDelegate {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+//        FirestoreManager.sharedInstance.signOut()
         checkLoginStatus()
     }
     
@@ -45,21 +46,33 @@ class MatchViewController: UIViewController, FUIAuthDelegate {
     func checkLoginStatus() {
         Auth.auth().addStateDidChangeListener { auth, user in
             if user != nil {
-                guard let email = Auth.auth().currentUser?.email else { return }
-                FirestoreManager.sharedInstance.fetchUsersLocation(email: email).then { location -> Void in
-                    FirestoreManager.sharedInstance.fetchPotentialMatches(location: location).then { lesbians -> Void in
-                        // Download images
-                        for lesbian in lesbians {
-                            self.fetchImage(url: lesbian.profileImageURL!).then { image -> Void in
-                                self.images.append(image)
-                                self.cardView.reloadData()
+                // Check if user has completed onboarding
+                guard let currentEmail = auth.currentUser?.email else { return }
+                FirestoreManager.sharedInstance.checkIfUserHasCompletedOnboarding(email: currentEmail).then { answer -> Void in
+                    if answer {
+                        // Only if user is logging in
+                        FirestoreManager.sharedInstance.fetchUserLocation(email: currentEmail).then { location -> Void in
+                            FirestoreManager.sharedInstance.fetchPotentialMatches(location: location).then { lesbians -> Void in
+                                // Download images
+                                for lesbian in lesbians {
+                                    self.fetchImage(url: lesbian.profileImageURL!).then { image -> Void in
+                                        self.images.append(image)
+                                        print("Image added.")
+                                    }
+                                }
+                                
+                                print("Here")
                                 self.activityIndicator.stopAnimating()
+                                self.cardView.reloadData()
                             }
                         }
+                    } else {
+                        self.performSegue(withIdentifier: profileSetupSegue, sender: nil)
                     }
                 }
             } else {
                 // No user is signed in.
+                print("No user. Will present login.")
                 self.presentLogin()
             }
         }
@@ -75,6 +88,8 @@ class MatchViewController: UIViewController, FUIAuthDelegate {
                     Alamofire.request(url!).responseImage { response in
                         if let image = response.result.value {
                             fulfill(image)
+                        } else {
+                            reject(error!)
                         }
                     }
                 }
@@ -88,6 +103,7 @@ class MatchViewController: UIViewController, FUIAuthDelegate {
         let providers: [FUIAuthProvider] = [FUIFacebookAuth()]
         authUI?.providers = providers
         let authViewController = authUI?.authViewController()
+        print("Mark")
         self.present(authViewController!, animated: true, completion: nil)
     }
     

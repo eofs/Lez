@@ -37,7 +37,9 @@ class ProfileImageViewController: UIViewController {
             FirestoreManager.sharedInstance.uploadImage(image: image).then { isUploaded -> Void in
                 print(isUploaded)
                 if isUploaded {
-                    self.performSegue(withIdentifier: matchSegue, sender: nil)
+                    let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                    let viewController = storyboard.instantiateViewController(withIdentifier: "InitialController") 
+                    self.present(viewController, animated: true)
                 } else {
                      let dialogMessage = UIAlertController(title: "Oh-uh", message: "Image couldn't be uploaded, please try again.", preferredStyle: .alert)
                     

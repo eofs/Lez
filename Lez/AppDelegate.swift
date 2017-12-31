@@ -32,7 +32,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         FirebaseConfiguration.shared.setLoggerLevel(.min)
         FirebaseApp.configure()
         
-        GMSPlacesClient.provideAPIKey("AIzaSyBkuO2zqtmhhhNVdLXi5HEfdzdnwaPUD7U ")
+        GMSPlacesClient.provideAPIKey("AIzaSyBkuO2zqtmhhhNVdLXi5HEfdzdnwaPUD7U")
         
         return true
     }
