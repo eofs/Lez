@@ -232,7 +232,7 @@
                     </view>
                     <connections>
                         <outlet property="profileImage" destination="gpw-Ss-Rcn" id="FKS-GJ-nHE"/>
-                        <segue destination="WCz-k7-gxe" kind="show" identifier="goToMatch" id="zIp-KU-HNj"/>
+                        <segue destination="WCz-k7-gxe" kind="showDetail" identifier="goToMatch" action="showViewController:sender:" id="zIp-KU-HNj"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JI9-gr-Kxx" userLabel="First Responder" sceneMemberID="firstResponder"/>

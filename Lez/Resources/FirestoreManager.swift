@@ -43,7 +43,7 @@ class FirestoreManager {
             if userExists {
                 print("User exists, going to MatchViewController.")
             } else {
-                Defaults.sharedInstance.saveLocation(location: user.location)
+//                Defaults.sharedInstance.saveLocation(location: user.location)
                 self.db.collection("users").document(user.email).setData([
                     "name": user.name,
                     "email": user.email,
@@ -60,18 +60,32 @@ class FirestoreManager {
         }
     }
     
-    func fetchUsersLocation(email: String) -> Promise<String> {
+    func fetchUserLocation(email: String) -> Promise<String> {
         return Promise { fulfill, reject in
             let docRef = db.collection("users").document(email)
             docRef.getDocument { (document, error) in
                 guard let document = document else {
-                    reject(error!)
                     return
                 }
                 print(document.data())
                 let lesbian = try! FirestoreDecoder().decode(Lesbian.self, from: document.data())
-                
                 fulfill(lesbian.location)
+            }
+        }
+    }
+    
+    func checkIfUserHasCompletedOnboarding(email: String) -> Promise<Bool> {
+        return Promise { fulfill, reject in
+            let docRef = db.collection("users").whereField("email", isEqualTo: email)
+            docRef.getDocuments { (documents, error) in
+                guard let results = documents?.documents else { return }
+                if results.count > 0 {
+                    print("Onboarding completed.")
+                    fulfill(true)
+                } else {
+                    print("Onboarding not completed.")
+                    fulfill(false)
+                }
             }
         }
     }
