@@ -51,24 +51,25 @@ class MatchViewController: UIViewController, FUIAuthDelegate {
                 FirestoreManager.sharedInstance.checkIfUserHasCompletedOnboarding(email: currentEmail).then { answer -> Void in
                     if answer {
                         // Only if user is logging in
-                        print(answer)
                         FirestoreManager.sharedInstance.fetchUserLocation(email: currentEmail).then { location -> Void in
                             FirestoreManager.sharedInstance.fetchPotentialMatches(location: location).then { lesbians -> Void in
                                 // Download images
                                 for lesbian in lesbians {
                                     self.fetchImage(url: lesbian.profileImageURL!).then { image -> Void in
                                         self.images.append(image)
-                                        self.cardView.reloadData()
-                                        self.activityIndicator.stopAnimating()
+                                        print("Image added.")
                                     }
                                 }
+                                
+                                print("Here")
+                                self.activityIndicator.stopAnimating()
+                                self.cardView.reloadData()
                             }
                         }
                     } else {
                         self.performSegue(withIdentifier: profileSetupSegue, sender: nil)
                     }
                 }
-                
             } else {
                 // No user is signed in.
                 print("No user. Will present login.")
